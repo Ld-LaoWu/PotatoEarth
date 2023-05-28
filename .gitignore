@@ -1,37 +1,14 @@
-# Prerequisites
-*.d
+#path  路径
+BuildResult/
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# PotatoEarthFiles 库编译的文件
+*.log
 
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-
-#path
-x64/
+# Visual Studio files and folder vs文件和文件夹
 .vs/
+**.sln
+**.vcxproj
+**.vcxproj.filters
+**.vcxproj.user
+**.csproj
 
