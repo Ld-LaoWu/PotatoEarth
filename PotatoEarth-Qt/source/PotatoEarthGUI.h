@@ -3,6 +3,7 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_PotatoEarthGUI.h"
 
+
 class PotatoEarthGUI : public QMainWindow
 {
     Q_OBJECT

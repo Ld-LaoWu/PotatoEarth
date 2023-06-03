@@ -18,6 +18,6 @@ group "PTCore"
 	include "PotatoEarth"
 group ""
 	
-group "DeskTop"
+group "PTDeskTop"
 	include "PotatoEarth-Qt"
 group ""

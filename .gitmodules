@@ -1,3 +1,6 @@
 [submodule "Premake/premake-Qt"]
 	path = Premake/premake-Qt
 	url = https://github.com/dcourtois/premake-qt.git
+[submodule "PotatoEarth/extern/spdlog"]
+	path = PotatoEarth/extern/spdlog
+	url = https://github.com/Ld-LaoWu/spdlog.git

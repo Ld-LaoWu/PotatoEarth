@@ -2,11 +2,10 @@
 #include <iostream>
 #include <QtWidgets/QApplication>
 
-#include "Core/PotatoEarth.h"
+#include "PotatoEarth.h"
 
 //控制发行版本
 #ifdef PO_DIST
-    #include <Windows.h>
     #pragma comment(linker, "/subsystem:windows /ENTRY:mainCRTStartup") // 暂时先这么处理一下
 #endif
 
@@ -16,16 +15,14 @@ int main(int argc, char *argv[])
     PotatoEarthGUI w;
     w.show();
 
-#ifdef PO_DEBUG
-    // 日志打印 + 调试窗口
-    std::cout << "欢迎来到土豆地球" << std::endl;
-    PotatoEarth::printEarthVersion();
-#endif
+//#if (defined PO_DEBUG) || (defined PO_RELEASE)
+    PTEarth::Log::Init();
+    PO_EARTH_INFO("欢迎来到土豆地球系列");
+//#endif // PO_DEBUG || PO_RELEASE
 
-#ifdef PO_RELEASE
-    // 调试窗口
-    std::cout << "欢迎来到土豆地球" << std::endl;
-#endif
+
+    auto earthApp = new PTEarth::Application();
+    delete earthApp;
 
     return a.exec();
 }

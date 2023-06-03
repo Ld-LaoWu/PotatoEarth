@@ -7,14 +7,15 @@ project "PotatoEarth-Qt"
 	kind "ConsoleApp"
 	language "C++"
 	targetdir("%{wks.location}/BuildResult/exec/" .. outputdir .. "/%{prj.name}" ) -- 输出的路径
-	objdir("%{wks.location}BuildResult/mid/" .. outputdir .. "/%{prj.name}" ) -- 中间文件输出的路径
+	objdir("%{wks.location}/BuildResult/mid/" .. outputdir .. "/%{prj.name}" ) -- 中间文件输出的路径
 
 
 	includedirs
 	{
 		"source",
 		"%{wks.location}/BuildResult/mid/%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}/%{prj.name}",
-		"%{wks.location}/PotatoEarth/source"
+		"%{wks.location}/PotatoEarth/source",
+		"%{wks.location}/PotatoEarth/extern/spdlog/include"
 	}
 	-- add the files
 	files 
@@ -25,6 +26,11 @@ project "PotatoEarth-Qt"
 		"source/**.ts",
 		"source/**.ui",
 		"source/**.qrc"
+	}
+
+	links
+	{
+		"PotatoEarth"
 	}
 
 	qt.enable()
@@ -48,7 +54,7 @@ project "PotatoEarth-Qt"
 		defines { "PO_DEBUG" }
 		qtsuffix "d"
 		runtime "Debug"
-		symbols "on"
+		symbols "On"
 
 	filter "configurations:Release"
 		defines { "PO_RELEASE" }
@@ -59,4 +65,4 @@ project "PotatoEarth-Qt"
 		defines { "PO_DIST" }
 		kind "WindowedApp"
 		runtime "Release"
-		optimize "on"
+		optimize "On"
