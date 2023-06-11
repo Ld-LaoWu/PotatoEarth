@@ -4,16 +4,16 @@
 
 namespace PTEarth {
 	
-	class PTEARTH_API Log 
+	class PTEARTH_API Log final
 	{
 	public:
 
 		static void Init();
-		inline static std::shared_ptr<spdlog::logger>& GetEarthLogger() { return s_EarthLogger; }
+		inline static std::shared_ptr<spdlog::logger>& GetEarthLogger() { return S_EarthLogger; }
 
 	private:
 		// 这么做或许并不合理 暂时先打印核心库的相关信息
-		static std::shared_ptr<spdlog::logger> s_EarthLogger;
+		static  std::shared_ptr<spdlog::logger> S_EarthLogger;
 	};
 }
 

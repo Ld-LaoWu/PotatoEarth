@@ -15,7 +15,8 @@ project "PotatoEarth-Qt"
 		"source",
 		"%{wks.location}/BuildResult/mid/%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}/%{prj.name}",
 		"%{wks.location}/PotatoEarth/source",
-		"%{wks.location}/PotatoEarth/extern/spdlog/include"
+		"%{wks.location}/PotatoEarth/extern/spdlog/include",
+		"%{wks.location}/PotatoEarth/extern/glm"
 	}
 	-- add the files
 	files 

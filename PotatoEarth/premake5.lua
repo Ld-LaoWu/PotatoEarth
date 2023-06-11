@@ -25,6 +25,7 @@ project "PotatoEarth"
 	includedirs
 	{
 		"source",
+		"%{wks.location}/PotatoEarth/extern/glm",
 		"%{wks.location}/PotatoEarth/extern/spdlog/include"
 	}
 
