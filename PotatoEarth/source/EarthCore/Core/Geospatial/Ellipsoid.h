@@ -1,10 +1,10 @@
 #pragma once
-#include "Core/PotatoEarthBase.h"
+#include "EarthCore/Core/PotatoEarthBase.h"
 
 #include <glm/vec3.hpp>
 #include <optional>
 
-#include "Core/Utility/Math/PTMath.h"
+#include "EarthCore/Core/Utility/Math/PTMath.h"
 #include "Cartograph.h"
 
 
@@ -13,7 +13,7 @@ namespace PTEarth {
 	* 椭球体 笛卡尔坐标系下面定义
 	* `(x / a)^2 + (y / b)^2 + (z / c)^2 = 1` 椭球体的表达方程
 	*/
-	class PTEARTH_API Ellipsoid 
+	class PTEARTH_API Ellipsoid
 	{
 	public:
 		static const Ellipsoid WGS84;   // 默认使用的椭球体
@@ -77,7 +77,7 @@ namespace PTEarth {
 			return this->m_Radii == rhs.m_Radii;
 		}
 
-		constexpr bool operator==(const Ellipsoid& rhs) const noexcept {
+		constexpr bool operator!=(const Ellipsoid& rhs) const noexcept {
 			return !(*this == rhs);
 		}
 	private:

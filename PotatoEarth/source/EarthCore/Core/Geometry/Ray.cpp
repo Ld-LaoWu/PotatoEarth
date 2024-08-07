@@ -1,6 +1,6 @@
 #include "potatopch.h"
 #include "Ray.h"
-#include "Core/Utility/Math/PTMath.h"
+#include "EarthCore/Core/Utility/Math/PTMath.h"
 
 namespace PTEarth {
 	Ray::Ray(const glm::dvec3& origin, const glm::dvec3& direction)

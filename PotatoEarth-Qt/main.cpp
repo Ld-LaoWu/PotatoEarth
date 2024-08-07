@@ -20,11 +20,11 @@ int main(int argc, char *argv[])
     PO_EARTH_INFO("欢迎来到土豆地球系列");
 //#endif // PO_DEBUG || PO_RELEASE
 
-    /*auto res = PTEarth::PTMath::convertLongitudeRange(3.14);
-    PO_EARTH_INFO("测试:{0}", res);*/
+    auto res = PTEarth::PTMath::convertLongitudeRange(3.14);
+    PO_EARTH_INFO("测试:{0}", res);
 
-    auto earthApp = new PTEarth::Application();
-    delete earthApp;
+    /*auto earthApp = new PTEarth::Application();
+    delete earthApp;*/
 
     return a.exec();
 }

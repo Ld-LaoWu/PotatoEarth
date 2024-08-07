@@ -12,7 +12,6 @@ namespace PTEarth {
 		S_EarthLogger = spdlog::stdout_color_mt("土豆地球");
 
 		// 发布模式下可以写入文件
-
 		S_EarthLogger->set_level(spdlog::level::trace);
 
 	}

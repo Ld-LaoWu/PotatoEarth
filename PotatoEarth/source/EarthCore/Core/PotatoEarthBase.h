@@ -7,6 +7,8 @@
 	#define PTEARTH_API __declspec(dllimport)
 #endif // PO_BUILD_DLL
 
+#define BIT(x) (1 << x )
+
 // earth里面 内部管理统计指针使用
 
 namespace PTEarth 

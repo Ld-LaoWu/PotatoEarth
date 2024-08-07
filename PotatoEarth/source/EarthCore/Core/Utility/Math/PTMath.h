@@ -1,5 +1,5 @@
 #pragma once
-#include "Core/PotatoEarthBase.h"
+#include "EarthCore/Core/PotatoEarthBase.h"
 #include <glm/gtc/epsilon.hpp>
 
 namespace PTEarth {

@@ -1,6 +1,6 @@
 #pragma once
-#include "Core/Utility/Math/PTMath.h"
-#include "Core/PotatoEarthBase.h"
+#include "EarthCore/Core/Utility/Math/PTMath.h"
+#include "EarthCore/Core/PotatoEarthBase.h"
 namespace PTEarth{
 	class PTEARTH_API Cartographic final 
 	{

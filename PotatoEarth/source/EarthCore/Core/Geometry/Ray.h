@@ -1,5 +1,5 @@
 #pragma once
-#include "Core/PotatoEarthBase.h"
+#include "EarthCore/Core/PotatoEarthBase.h"
 #include <glm/vec3.hpp>
 
 namespace PTEarth {
