@@ -1,8 +1,8 @@
 #pragma once
 
 // -------- Core Ä£¿é ----------------------
-#include "Core/Log.h"
-#include "Core/Application.h"
+#include "EarthCore/Core/Log.h"
+#include "EarthCore/Core/Application.h"
 
-#include "Core/Utility/Math/PTMath.h"
+#include "EarthCore/Core/Utility/Math/PTMath.h"
 

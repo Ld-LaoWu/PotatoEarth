@@ -16,6 +16,8 @@ project "PotatoEarth"
 	defines
 	{
 	}
+
+
 	files
 	{
 		"source/**.h",
@@ -26,11 +28,14 @@ project "PotatoEarth"
 	{
 		"source",
 		"%{wks.location}/PotatoEarth/extern/glm",
-		"%{wks.location}/PotatoEarth/extern/spdlog/include"
+		"%{wks.location}/PotatoEarth/extern/spdlog/include",
+		"%{wks.location}/PotatoEarth/extern/Glad/include"
 	}
 
 	links 
 	{
+		"Glad",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"

@@ -5,6 +5,8 @@
 #include <qopenglfunctions.h>
 #include <qopenglfunctions_4_5_core.h>
 
+// 显示Opengl + DX + Vulkan Api 渲染的3d像素数据
+
 class PT_QtGlwidget : public QOpenGLWidget, protected QOpenGLFunctions
 {
 	Q_OBJECT

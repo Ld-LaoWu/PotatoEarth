@@ -13,6 +13,9 @@ workspace "PotatoEarth"
 		"Dist"
 	}
 
+group "PT3rd"
+	include "PotatoEarth/extern/Glad"
+group ""
 
 group "PTCore"
 	include "PotatoEarth"
