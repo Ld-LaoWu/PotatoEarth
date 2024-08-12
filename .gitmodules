@@ -7,3 +7,6 @@
 [submodule "PotatoEarth/extern/glm"]
 	path = PotatoEarth/extern/glm
 	url = https://github.com/Ld-LaoWu/glm.git
+[submodule "PotatoEarth/extern/ImGui"]
+	path = PotatoEarth/extern/ImGui
+	url = https://github.com/Ld-LaoWu/imgui.git

@@ -29,12 +29,15 @@ project "PotatoEarth"
 		"source",
 		"%{wks.location}/PotatoEarth/extern/glm",
 		"%{wks.location}/PotatoEarth/extern/spdlog/include",
-		"%{wks.location}/PotatoEarth/extern/Glad/include"
+		"%{wks.location}/PotatoEarth/extern/Glad/include",
+		"%{wks.location}/PotatoEarth/extern/ImGui",
+		"%{wks.location}/PotatoEarth/extern/ImGui/backends"
 	}
 
 	links 
 	{
 		"Glad",
+		"ImGui",
 		"opengl32.lib"
 	}
 

@@ -15,6 +15,7 @@ workspace "PotatoEarth"
 
 group "PT3rd"
 	include "PotatoEarth/extern/Glad"
+	include "PotatoEarth/extern/ImGui"
 group ""
 
 group "PTCore"
