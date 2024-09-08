@@ -3,7 +3,7 @@
 
 namespace PTEarth {
 
-	class WindowResizedEvent : public Event
+	class PTEARTH_API WindowResizedEvent : public Event
 	{
 	public:
 		WindowResizedEvent(unsigned int width, unsigned int  height)
@@ -16,25 +16,25 @@ namespace PTEarth {
 		std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "WindowResizeEvent: " << m_Width << ", " << m_Height;
+			ss << "´°¿ÚËõ·Å: " << m_Width << ", " << m_Height;
 			return ss.str();
 		}
 
 
-		EVENT_CLASS_TYPE(EventType::WindowResized)
+		EVENT_CLASS_TYPE(WindowResized)
 		EVENT_CLASS_CATEGORY(EventCategory::EventCategoryWindow)
 
 	private:
 		unsigned int m_Width, m_Height;
 	};
 
-	class WindowCloseEvent : public Event
+	class PTEARTH_API WindowCloseEvent : public Event
 	{
 	public:
 		WindowCloseEvent() = default;
 
-		EVENT_CLASS_TYPE(EventType::WindowClosed)
-		EVENT_CLASS_CATEGORY(EventCategoryWindow)
+		EVENT_CLASS_TYPE(WindowClosed)
+		EVENT_CLASS_CATEGORY(EventCategory::EventCategoryWindow)
 	};
 
 

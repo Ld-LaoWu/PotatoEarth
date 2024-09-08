@@ -1,10 +1,11 @@
 -- 核心库
 project "PotatoEarth"
+	-- location "PotatoEarth" -- 位置
 	cppdialect "C++17"
-	-- kind "StaticLib"
 	kind "SharedLib" -- dll
+	--kind "StaticLib"
 	language "C++"
-	staticruntime "off" 
+	staticruntime "on"
  
 	targetdir("%{wks.location}/BuildResult/exec/" .. outputdir .. "/%{prj.name}" ) -- 输出的路径
 	objdir("%{wks.location}/BuildResult/mid/" .. outputdir .. "/%{prj.name}" ) -- 中间文件输出的路径
@@ -15,8 +16,8 @@ project "PotatoEarth"
 
 	defines
 	{
+		"PT_BUILD_DLL"
 	}
-
 
 	files
 	{
@@ -44,10 +45,11 @@ project "PotatoEarth"
 	filter "system:windows"
 		cppdialect "C++17"
 		systemversion "latest"
+        -- buildoptions { "/wd4251" }
 		defines
 		{
-			"PO_PLATFORM_WINDOWS", -- 不同渲染库
-			"PT_BUILD_DLL"
+			"PTEARTH_PLATFORM_WINDOWS", -- 不同渲染库
+			"PTEARTH_DYNAMIC_LINK"
 		}
 		
 		postbuildcommands

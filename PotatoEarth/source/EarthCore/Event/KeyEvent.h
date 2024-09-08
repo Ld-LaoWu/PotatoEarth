@@ -20,11 +20,11 @@ namespace PTEarth {
 		std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "KeyPressed:" << m_KeyCode << "(repeat = " << m_isRepeat << ")";
+			ss << "键盘按下:" << m_KeyCode << "(repeat = " << m_isRepeat << ")";
 			return ss.str();
 		}
 
-		EVENT_CLASS_TYPE(EventType::KeyPressed)
+		EVENT_CLASS_TYPE(KeyPressed)
 	private:
 		bool m_isRepeat;
 	};
@@ -35,10 +35,10 @@ namespace PTEarth {
 		std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "KeyReleased:" << m_KeyCode ;
+			ss << "键盘按下偷抬起:" << m_KeyCode ;
 			return ss.str();
 		}
 
-		EVENT_CLASS_TYPE(EventType::KeyPressed)
+		EVENT_CLASS_TYPE(KeyPressed)
 	};
 }

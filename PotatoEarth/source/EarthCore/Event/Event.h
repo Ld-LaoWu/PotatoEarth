@@ -1,6 +1,6 @@
 #pragma once
 #include "potatopch.h"
-#include "Core/PotatoEarthBase.h"
+#include "EarthCore/Core/PotatoEarthBase.h"
 
 
 // 基础事件类
@@ -62,7 +62,7 @@ namespace PTEarth {
 	};
 
 	// 事件分发
-	class EventDispatcher {
+	class PTEARTH_API EventDispatcher {
 		template<typename T>
 		using EventFn = std::function<bool(T&)>;
 	public:
@@ -72,7 +72,6 @@ namespace PTEarth {
 		template< typename T>
 		bool Dispatch(EventFn<T> func) {
 			if (m_Event.GetEventType() == T::GetStaticEventType()) {
-
 				m_Event.m_Handled = func(static_cast<T&>(m_Event));
 				return true;
 			}

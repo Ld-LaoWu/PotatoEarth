@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Event.h"
 
 namespace PTEarth {
@@ -16,11 +15,11 @@ namespace PTEarth {
 
 		virtual std::string ToString() const override { 
 			std::stringstream outss;
-			outss << "MouseMoved:( " << m_MouseX << "," << m_MouseY << " )";
+			outss << "鼠标移动:( " << m_MouseX << "," << m_MouseY << " )";
 			return outss.str();
 		}
 
-		EVENT_CLASS_TYPE(EventType::MouseMoved)
+		EVENT_CLASS_TYPE(MouseMoved)
 		EVENT_CLASS_CATEGORY(EventCategory::EventCategoryMouse | EventCategory::EventCategoryInput)
 	private:
 		float m_MouseX, m_MouseY;
@@ -33,11 +32,11 @@ namespace PTEarth {
 
 		virtual std::string ToString() const override {
 			std::stringstream outss;
-			outss << "MouseWheel:( " << m_Delta << " )";
+			outss << "鼠标滚轮:( " << m_Delta << " )";
 			return outss.str();
 		}
 
-		EVENT_CLASS_TYPE(EventType::MouseWheeled)
+		EVENT_CLASS_TYPE(MouseWheeled)
 		EVENT_CLASS_CATEGORY(EventCategory::EventCategoryMouse | EventCategory::EventCategoryInput)
 
 	private:
@@ -63,10 +62,10 @@ namespace PTEarth {
 
 		virtual std::string ToString() const override {
 			std::stringstream outss;
-			outss << "MousePressed:( " << m_Button << " )";
+			outss << "鼠标按下:( " << m_Button << " )";
 			return outss.str();
 		}
-		EVENT_CLASS_TYPE(EventType::MousePressed)
+		EVENT_CLASS_TYPE(MousePressed)
 	};
 
 	class PTEARTH_API MouseReleasedEvent : public MouseButtonEvent {
@@ -77,9 +76,9 @@ namespace PTEarth {
 
 		virtual std::string ToString() const override {
 			std::stringstream outss;
-			outss << "MouseReleased:( " << m_Button << " )";
+			outss << "鼠标抬起:( " << m_Button << " )";
 			return outss.str();
 		}
-		EVENT_CLASS_TYPE(EventType::MouseReleased)
+		EVENT_CLASS_TYPE(MouseReleased)
 	};
 }

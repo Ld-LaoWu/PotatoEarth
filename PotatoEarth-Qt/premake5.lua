@@ -3,6 +3,7 @@ include "../Premake/premake-Qt/qt.lua"
 local qt = premake.extensions.qt
 
 project "PotatoEarth-Qt"
+	-- location "PotatoEarth-Qt" -- Œª÷√
 	cppdialect "C++17"
 	kind "ConsoleApp"
 	language "C++"
@@ -16,7 +17,10 @@ project "PotatoEarth-Qt"
 		"%{wks.location}/BuildResult/mid/%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}/%{prj.name}",
 		"%{wks.location}/PotatoEarth/source",
 		"%{wks.location}/PotatoEarth/extern/spdlog/include",
-		"%{wks.location}/PotatoEarth/extern/glm"
+		"%{wks.location}/PotatoEarth/extern/glm",
+		"%{wks.location}/PotatoEarth/extern/ImGui",
+		"%{wks.location}/PotatoEarth/extern/ImGui/backends",
+		"%{wks.location}/PotatoEarth/extern/Glad/include"
 	}
 	-- add the files
 	files 
@@ -42,14 +46,20 @@ project "PotatoEarth-Qt"
 	{ 
 		"core", 
 		"gui", 
-		"widgets", 
-		"opengl" 
+		"widgets"
+		-- "opengl" 
 	}
 
 	qtprefix "Qt5"
 
 	filter "system:windows"
 		systemversion "latest"
+		libdirs { "%{wks.location}/BuildResult/exec/" .. outputdir .. "/%{prj.name}" }
+		defines
+		{
+			"PTEARTH_PLATFORM_WINDOWS", -- ≤ªÕ¨‰÷»æø‚
+			"PTEARTH_DYNAMIC_LINK"
+		}
 
 	filter "configurations:Debug"
 		defines { "PO_DEBUG" }

@@ -1,6 +1,8 @@
 #pragma once
 #include "PotatoEarthBase.h"
 #include "spdlog/spdlog.h"
+#include "spdlog/fmt/ostr.h"
+
 
 namespace PTEarth {
 	
@@ -8,17 +10,19 @@ namespace PTEarth {
 	{
 	public:
 
-		static void Init();
-		inline static std::shared_ptr<spdlog::logger>& GetEarthLogger() { return S_EarthLogger; }
+		static std::shared_ptr<spdlog::logger> GetIntance();
+
+		Log(const Log&) = delete;
+		Log& operator=(const Log&) = delete;
 
 	private:
-		// 这么做或许并不合理 暂时先打印核心库的相关信息
-		static  std::shared_ptr<spdlog::logger> S_EarthLogger;
+
+		Log() = default;
 	};
 }
 
-#define PO_EARTH_TRACE(...)		 ::PTEarth::Log::GetEarthLogger()->trace(__VA_ARGS__)
-#define PO_EARTH_INFO(...)		 ::PTEarth::Log::GetEarthLogger()->info(__VA_ARGS__)
-#define PO_EARTH_WARN(...)		 ::PTEarth::Log::GetEarthLogger()->warn(__VA_ARGS__)
-#define PO_EARTH_ERROR(...)		 ::PTEarth::Log::GetEarthLogger()->error(__VA_ARGS__)
-#define PO_EARTH_CRITICAL(...)   ::PTEarth::Log::GetEarthLogger()->critical(__VA_ARGS__)
+#define PT_EARTH_TRACE(...)		 ::PTEarth::Log::GetIntance()->trace(__VA_ARGS__)
+#define PT_EARTH_INFO(...)		 ::PTEarth::Log::GetIntance()->info(__VA_ARGS__)
+#define PT_EARTH_WARN(...)		 ::PTEarth::Log::GetIntance()->warn(__VA_ARGS__)
+#define PT_EARTH_ERROR(...)		 ::PTEarth::Log::GetIntance()->error(__VA_ARGS__)
+#define PT_EARTH_CRITICAL(...)   ::PTEarth::Log::GetIntance()->critical(__VA_ARGS__)

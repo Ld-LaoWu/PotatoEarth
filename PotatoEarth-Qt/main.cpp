@@ -1,8 +1,5 @@
 #include "PotatoEarthGUI.h"
 #include <iostream>
-#include <QtWidgets/QApplication>
-
-#include <PotatoEarth.h>
 
 //控制发行版本
 #ifdef PO_DIST
@@ -13,18 +10,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     PotatoEarthGUI w;
+    w.AddGraphicWidget();
     w.show();
-
-//#if (defined PO_DEBUG) || (defined PO_RELEASE)
-    PTEarth::Log::Init();
-    PO_EARTH_INFO("欢迎来到土豆地球系列");
-//#endif // PO_DEBUG || PO_RELEASE
-
-    auto res = PTEarth::PTMath::convertLongitudeRange(3.14);
-    PO_EARTH_INFO("测试:{0}", res);
-
-    /*auto earthApp = new PTEarth::Application();
-    delete earthApp;*/
 
     return a.exec();
 }
