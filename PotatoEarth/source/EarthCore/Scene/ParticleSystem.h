@@ -1,10 +1,11 @@
 #pragma once
 
 #include "EarthCore/Core/PotatoEarthBase.h"
-#include "EarthCore/Render/Texture.h"
+#include "EarthCore/Render/Shader.h"
+#include "EarthCore/Render/Buffer.h"
 #include <glm/glm.hpp>
 #include <vector>
-#include <random>
+#include <math.h>
 
 namespace PTEarth {
 
@@ -14,10 +15,10 @@ namespace PTEarth {
         glm::vec3 Velocity;
         glm::vec4 Color;
         float Size;
-        float Rotation;
         float Life;
         float MaxLife;
-        float NormalizedLife;  // 0.0 to 1.0
+        float Rotation;
+        float RotationSpeed;
     };
 
     // Emitter shape
@@ -29,118 +30,113 @@ namespace PTEarth {
         Circle
     };
 
-    // Particle emitter configuration
-    struct EmitterConfig {
+    // Particle system configuration
+    struct ParticleSystemConfig {
         // Emission
+        uint32_t MaxParticles = 1000;
         float EmissionRate = 100.0f;  // particles per second
-        int BurstCount = 0;           // particles at start
-        bool Looping = true;
-        float Duration = 5.0f;        // emitter lifetime
-        
-        // Shape
         EmitterShape Shape = EmitterShape::Sphere;
-        glm::vec3 ShapeExtents = glm::vec3(1.0f);
         float ShapeRadius = 1.0f;
-        float ShapeAngle = 45.0f;     // for cone
+        glm::vec3 ShapeExtents = glm::vec3(1.0f);
         
-        // Initial values
-        glm::vec3 StartVelocity = glm::vec3(0.0f, 1.0f, 0.0f);
-        float StartVelocityVariation = 0.5f;
-        glm::vec4 StartColor = glm::vec4(1.0f);
-        float StartColorVariation = 0.0f;
+        // Velocity
+        float StartSpeed = 5.0f;
+        float SpeedVariation = 0.0f;
+        glm::vec3 VelocityDirection = glm::vec3(0.0f, 1.0f, 0.0f);
+        float VelocitySpread = 0.5f;  // 0-1
+        
+        // Life
+        float StartLife = 2.0f;
+        float LifeVariation = 0.5f;
+        
+        // Size
         float StartSize = 1.0f;
-        float StartSizeVariation = 0.5f;
-        float StartRotation = 0.0f;
-        float StartRotationVariation = 180.0f;
-        float StartLife = 5.0f;
-        float StartLifeVariation = 1.0f;
-        
-        // Over lifetime
-        glm::vec4 EndColor = glm::vec4(1.0f, 1.0f, 1.0f, 0.0f);
         float EndSize = 0.0f;
-        float EndRotation = 0.0f;
+        float SizeVariation = 0.0f;
+        
+        // Color
+        glm::vec4 StartColor = glm::vec4(1.0f);
+        glm::vec4 EndColor = glm::vec4(1.0f, 1.0f, 1.0f, 0.0f);
+        
+        // Rotation
+        float StartRotation = 0.0f;
+        float RotationSpeed = 0.0f;
         
         // Physics
         glm::vec3 Gravity = glm::vec3(0.0f, -9.8f, 0.0f);
-        float Drag = 0.1f;
+        float Drag = 0.0f;
         
         // Texture
         PT_Ref<Texture> ParticleTexture;
+        bool UseTexture = false;
     };
 
-    // Particle system
     class ParticleSystem {
     public:
-        ParticleSystem();
+        ParticleSystem(const ParticleSystemConfig& config);
         ~ParticleSystem();
-        
-        void Initialize(const EmitterConfig& config);
-        void Shutdown();
-        
+
+        void Initialize();
         void Update(float deltaTime);
-        void Render(const glm::mat4& viewProjection);
-        
+        void Render(const glm::mat4& viewProjection, const glm::vec3& cameraPosition);
+
         // Control
         void Play();
         void Pause();
         void Stop();
         void Reset();
+
+        // Emitter transform
+        void SetPosition(const glm::vec3& position) { m_Position = position; }
+        void SetRotation(const glm::quat& rotation) { m_Rotation = rotation; }
         
-        // Burst emission
-        void EmitBurst(int count);
-        
+        glm::vec3 GetPosition() const { return m_Position; }
+
         // Settings
-        void SetEmitterPosition(const glm::vec3& position) { m_EmitterPosition = position; }
-        void SetEmitterRotation(const glm::quat& rotation) { m_EmitterRotation = rotation; }
-        
-        bool IsPlaying() const { return m_Playing; }
-        int GetActiveParticleCount() const { return m_ActiveParticles; }
-        
+        void SetEmissionRate(float rate) { m_Config.EmissionRate = rate; }
+        void SetStartColor(const glm::vec4& color) { m_Config.StartColor = color; }
+        void SetEndColor(const glm::vec4& color) { m_Config.EndColor = color; }
+
+        // Status
+        bool IsPlaying() const { return m_IsPlaying; }
+        uint32_t GetActiveParticleCount() const { return m_ActiveCount; }
+
     private:
-        void EmitParticle();
-        void UpdateParticle(Particle& particle, float deltaTime);
-        glm::vec3 GenerateRandomPosition();
-        glm::vec3 GenerateRandomVelocity();
-        
+        void Emit(uint32_t count);
+        void SpawnParticle(Particle& particle);
+        glm::vec3 GetRandomPositionInShape();
+        glm::vec3 GetRandomDirection();
+
     private:
-        EmitterConfig m_Config;
+        ParticleSystemConfig m_Config;
+        
         std::vector<Particle> m_Particles;
+        uint32_t m_ActiveCount = 0;
         
-        glm::vec3 m_EmitterPosition = glm::vec3(0.0f);
-        glm::quat m_EmitterRotation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
+        glm::vec3 m_Position = glm::vec3(0.0f);
+        glm::quat m_Rotation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
         
-        bool m_Playing = false;
-        float m_EmitTimer = 0.0f;
-        float m_EmitterTimer = 0.0f;
-        int m_ActiveParticles = 0;
+        float m_EmissionAccumulator = 0.0f;
+        bool m_IsPlaying = true;
         
-        std::mt19937 m_Random;
+        // GPU resources
+        PT_Ref<Shader> m_ParticleShader;
+        PT_Ref<VertexArray> m_VAO;
+        PT_Ref<VertexBuffer> m_VBO;
+        std::vector<float> m_InstanceData;
     };
 
     // Particle system collection
     class ParticleSystemCollection {
     public:
-        void AddSystem(const std::string& name, PT_Ref<ParticleSystem> system);
-        void RemoveSystem(const std::string& name);
-        PT_Ref<ParticleSystem> GetSystem(const std::string& name);
+        void Add(PT_Ref<ParticleSystem> system) { m_Systems.push_back(system); }
+        void Remove(PT_Ref<ParticleSystem> system);
         
         void Update(float deltaTime);
-        void Render(const glm::mat4& viewProjection);
+        void Render(const glm::mat4& viewProjection, const glm::vec3& cameraPosition);
         
     private:
-        std::unordered_map<std::string, PT_Ref<ParticleSystem>> m_Systems;
+        std::vector<PT_Ref<ParticleSystem>> m_Systems;
     };
-
-    // Preset particle effects
-    namespace ParticlePresets {
-        EmitterConfig Fire();
-        EmitterConfig Smoke();
-        EmitterConfig Explosion();
-        EmitterConfig Sparkles();
-        EmitterConfig Rain();
-        EmitterConfig Snow();
-        EmitterConfig Dust();
-        EmitterConfig Magic();
-    }
 
 }
