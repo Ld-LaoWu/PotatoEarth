@@ -8,7 +8,7 @@ namespace PTEarth {
     class WindowCloseEvent;
     class Scene;
     class Camera;
-    class EarthGlobe;
+    class TileQuadtree;
 
     class PTEARTH_API Application 
     {
@@ -20,7 +20,6 @@ namespace PTEarth {
         void Close();
         void Run();
 
-        // New rendering methods
         void OnUpdate();
         void OnRender();
         void OnImGuiRender();
@@ -42,10 +41,9 @@ namespace PTEarth {
         bool m_Running = true;
         static Application* S_Instance;
 
-        // New members
         PT_Ref<Scene> m_Scene;
         PT_Ref<Camera> m_Camera;
-        PT_Ref<EarthGlobe> m_EarthGlobe;
+        PT_Ref<TileQuadtree> m_TileQuadtree;
 
         float m_LastFrameTime = 0.0f;
     };
