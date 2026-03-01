@@ -544,7 +544,7 @@ class CesiumEarth:
         elif key == b'3':
             self.tile_loader.set_provider('osm')
             self.current_provider = 'osm'
-            print("Switched to OSM')
+            print("Switched to OSM")
         elif key == b'\x1b':
             self.tile_loader.stop()
             sys.exit(0)
