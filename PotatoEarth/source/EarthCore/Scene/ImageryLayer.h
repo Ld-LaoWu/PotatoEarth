@@ -1,26 +1,28 @@
 #pragma once
 
 #include "EarthCore/Core/PotatoEarthBase.h"
-#include "Tile.h"
+#include "EarthCore/Scene/Tile.h"
 #include "EarthCore/Render/Texture.h"
-#include <future>
+#include <string>
+#include <vector>
 #include <queue>
-#include <mutex>
+#include <future>
 
 namespace PTEarth {
 
+    // Imagery provider types
     enum class ImageryProviderType {
-        OpenStreetMap,
         BingMaps,
-        Custom
+        OpenStreetMap,
+        Mapbox,
+        GoogleEarth,
+        Sentinel,
+        SingleTile,
+        TMS,
+        UrlTemplate
     };
 
-    struct ImageryTileRequest {
-        TileID ID;
-        std::string URL;
-        std::promise<PT_Ref<Texture>> Promise;
-    };
-
+    // Imagery layer
     class ImageryLayer {
     public:
         ImageryLayer(const std::string& name, ImageryProviderType type);
@@ -29,28 +31,48 @@ namespace PTEarth {
         void Initialize();
         void Shutdown();
 
-        // Get texture for a tile
+        // Get texture for tile
         PT_Ref<Texture> GetTileTexture(const TileID& id);
         bool IsTileAvailable(const TileID& id) const;
 
         // Async loading
-        void ProcessLoadingQueue();
+        void Update();
 
         // Configuration
-        void SetMaxConcurrentRequests(size_t max) { m_MaxConcurrentRequests = max; }
+        void SetAlpha(float alpha) { m_Alpha = alpha; }
+        void SetBrightness(float brightness) { m_Brightness = brightness; }
+        void SetContrast(float contrast) { m_Contrast = contrast; }
+        void SetSaturation(float saturation) { m_Saturation = saturation; }
+        void SetGamma(float gamma) { m_Gamma = gamma; }
+        void SetVisible(bool visible) { m_Visible = visible; }
+
+        float GetAlpha() const { return m_Alpha; }
+        float GetBrightness() const { return m_Brightness; }
+        float GetContrast() const { return m_Contrast; }
+        float GetSaturation() const { return m_Saturation; }
+        float GetGamma() const { return m_Gamma; }
+        bool IsVisible() const { return m_Visible; }
 
         const std::string& GetName() const { return m_Name; }
 
     private:
         std::string BuildURL(const TileID& id) const;
-        void DownloadTile(const TileID& id);
+        void LoadTile(const TileID& id);
         std::string GetCachePath(const TileID& id) const;
 
     private:
         std::string m_Name;
-        ImageryProviderType m_ProviderType;
+        ImageryProviderType m_Type;
 
-        // Tile cache (in memory)
+        // Style properties
+        float m_Alpha = 1.0f;
+        float m_Brightness = 1.0f;
+        float m_Contrast = 1.0f;
+        float m_Saturation = 1.0f;
+        float m_Gamma = 1.0f;
+        bool m_Visible = true;
+
+        // Tile cache
         std::unordered_map<TileID, PT_Ref<Texture>, TileIDHash> m_TileCache;
         std::mutex m_CacheMutex;
 
@@ -58,9 +80,29 @@ namespace PTEarth {
         std::queue<TileID> m_LoadQueue;
         std::mutex m_QueueMutex;
 
-        // Active downloads
-        std::vector<std::future<void>> m_ActiveDownloads;
-        size_t m_MaxConcurrentRequests = 4;
+        // Async downloads
+        std::vector<std::future<void>> m_PendingDownloads;
+        size_t m_MaxConcurrentDownloads = 4;
+    };
+
+    // Imagery layer collection
+    class ImageryLayerCollection {
+    public:
+        void AddLayer(PT_Ref<ImageryLayer> layer);
+        void RemoveLayer(const std::string& name);
+        void MoveLayer(const std::string& name, int newIndex);
+        
+        PT_Ref<ImageryLayer> GetLayer(const std::string& name);
+        PT_Ref<ImageryLayer> GetLayer(int index);
+        int GetLayerCount() const { return (int)m_Layers.size(); }
+        
+        void UpdateAll();
+        
+        // Get combined texture for tile (blend all layers)
+        // PT_Ref<Texture> GetCombinedTexture(const TileID& id);
+
+    private:
+        std::vector<PT_Ref<ImageryLayer>> m_Layers;
     };
 
 }
