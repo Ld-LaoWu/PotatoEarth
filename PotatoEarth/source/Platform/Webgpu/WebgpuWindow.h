@@ -3,7 +3,7 @@
 #include "EarthCore/Render/GraphicsWindow.h"
 
 
-// windows 平台下的API 抽象
+// windows WebGPU绐楀彛
 
 namespace PTEarth {
 

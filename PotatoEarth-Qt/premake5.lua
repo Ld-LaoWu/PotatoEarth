@@ -1,14 +1,14 @@
--- Qt½çÃæ
+ï»¿-- Qtï¿½ï¿½ï¿½ï¿½
 include "../Premake/premake-Qt/qt.lua"
 local qt = premake.extensions.qt
 
 project "PotatoEarth-Qt"
-	-- location "PotatoEarth-Qt" -- Î»ÖÃ
+	-- location "PotatoEarth-Qt" -- Î»ï¿½ï¿½
 	cppdialect "C++17"
 	kind "ConsoleApp"
 	language "C++"
-	targetdir("%{wks.location}/BuildResult/exec/" .. outputdir .. "/%{prj.name}" ) -- Êä³öµÄÂ·¾¶
-	objdir("%{wks.location}/BuildResult/mid/" .. outputdir .. "/%{prj.name}" ) -- ÖÐ¼äÎÄ¼þÊä³öµÄÂ·¾¶
+	targetdir("%{wks.location}/BuildResult/exec/" .. outputdir .. "/%{prj.name}" ) -- ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½
+	objdir("%{wks.location}/BuildResult/mid/" .. outputdir .. "/%{prj.name}" ) -- ï¿½Ð¼ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½
 
 
 	includedirs
@@ -40,7 +40,7 @@ project "PotatoEarth-Qt"
 
 	qt.enable()
 	qtuseexternalinclude ( true )
-	qtpath "E:/software/programDev/Qt/5.15.2/msvc2019_64"
+	qtpath "E:/InstallSoftware/ProgramDev/Qt/5.12.12/msvc2017_64"
 
 	qtmodules 
 	{ 
@@ -57,7 +57,7 @@ project "PotatoEarth-Qt"
 		libdirs { "%{wks.location}/BuildResult/exec/" .. outputdir .. "/%{prj.name}" }
 		defines
 		{
-			"PTEARTH_PLATFORM_WINDOWS", -- ²»Í¬äÖÈ¾¿â
+			"PTEARTH_PLATFORM_WINDOWS", -- ï¿½ï¿½Í¬ï¿½ï¿½È¾ï¿½ï¿½
 			"PTEARTH_DYNAMIC_LINK"
 		}
 

@@ -53,7 +53,7 @@ namespace PTEarth {
 		return k + n;
 	}
 
-	// Å£¶ÙÀ­ÆÕÀ­Ë¹µü´ú·½³Ì
+	// Å£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	std::optional<glm::dvec3> Ellipsoid::scaleToGeodeticSurface(const glm::dvec3& cartesian) const noexcept
 	{
 		const double positionX = cartesian.x;

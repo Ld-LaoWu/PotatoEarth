@@ -2,7 +2,7 @@
 #define PT_QTGLWIDGET_H
 
 /*
-* 接入渲染端的 传送过来的数据
+* 锟斤拷锟斤拷锟斤拷染锟剿碉拷 锟斤拷锟酵癸拷锟斤拷锟斤拷锟斤拷锟斤拷
 */
 
 #include <qwidget.h>

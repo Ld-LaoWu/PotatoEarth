@@ -9,8 +9,8 @@
 
 
 /*
-* ³éÏó windowsDx , opengl vulkan µÈÏà¹ØAPI µÄ´°¿Ú¾ä±ú 
-* ¿ÉÒÔ°´Ðè³éÏó
+* ï¿½ï¿½ï¿½ï¿½ windowsDx , opengl vulkan ï¿½ï¿½ï¿½ï¿½ï¿½API ï¿½Ä´ï¿½ï¿½Ú¾ï¿½ï¿½ 
+* ï¿½ï¿½ï¿½Ô°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 */
 
 namespace PTEarth {
@@ -49,7 +49,7 @@ namespace PTEarth {
 		virtual void OnRenderFrame() = 0;
 		virtual void OnPostRenderFrame() = 0;
 
-		// ³éÏó²»Í¬µÄ
+		// ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½
 		virtual void* GetNativeWindow () const = 0;
 		
 		virtual void onWindowsEvent(Event& event) = 0;

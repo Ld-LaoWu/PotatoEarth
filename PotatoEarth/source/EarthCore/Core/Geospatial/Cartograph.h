@@ -5,7 +5,7 @@ namespace PTEarth{
 	class PTEARTH_API Cartographic final 
 	{
 	public:
-		// ¾­¶ÈÊµÀý
+		// ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½
 		constexpr Cartographic(
 			double longitudeRadians,
 			double latitudeRadians,
@@ -28,11 +28,11 @@ namespace PTEarth{
 			);
 		}
 
-		// ¾­¶È  »¡¶È
+		// ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½
 		double longitude;
-		// Î³¶È  »¡¶È
+		// Î³ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½
 		double latitude;
-		// ¸ß¶È  Ã×
+		// ï¿½ß¶ï¿½  ï¿½ï¿½
 		double height;
 	};
 }
