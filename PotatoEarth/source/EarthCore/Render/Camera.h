@@ -78,14 +78,12 @@ namespace PTEarth {
         double m_Latitude = 0.0;   // radians
         double m_Height = 20000000.0; // meters (default: 20000km)
         double m_Heading = 0.0;    // radians
-        double m_Pitch = -PI / 2;  // radians (looking down)
+        double m_Pitch = -3.14159265358979323846 / 2;  // radians (looking down)
 
         float m_FOV = 60.0f;
         float m_AspectRatio = 16.0f / 9.0f;
         float m_NearClip = 1.0f;
         float m_FarClip = 100000000.0f; // 100 million meters
     };
-
-    constexpr double PI = 3.14159265358979323846;
 
 }

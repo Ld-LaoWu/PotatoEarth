@@ -2,6 +2,7 @@
 #include "EarthGlobe.h"
 
 #include "EarthCore/Render/Buffer.h"
+#include "EarthCore/Core/Utility/Math/PTMath.h"
 #include <glad/glad.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <math>
@@ -65,12 +66,12 @@ namespace PTEarth {
 
         // Generate vertices
         for (uint32_t lat = 0; lat <= latSegments; ++lat) {
-            float theta = (float)lat * PI / (float)latSegments; // 0 to PI
+            float theta = (float)lat * PTMath::OnePi / (float)latSegments; // 0 to PI
             float sinTheta = sinf(theta);
             float cosTheta = cosf(theta);
 
             for (uint32_t lon = 0; lon <= lonSegments; ++lon) {
-                float phi = (float)lon * 2.0f * PI / (float)lonSegments; // 0 to 2PI
+                float phi = (float)lon * 2.0f * PTMath::OnePi / (float)lonSegments; // 0 to 2PI
                 float sinPhi = sinf(phi);
                 float cosPhi = cosf(phi);
 
@@ -99,7 +100,6 @@ namespace PTEarth {
                 uint32_t current = lat * (lonSegments + 1) + lon;
                 uint32_t next = current + lonSegments + 1;
 
-                // Two triangles per quad
                 indices.push_back(current);
                 indices.push_back(next);
                 indices.push_back(current + 1);

@@ -2,6 +2,7 @@
 #include "Camera.h"
 
 #include "EarthCore/Core/Geospatial/Ellipsoid.h"
+#include "EarthCore/Core/Utility/Math/PTMath.h"
 
 namespace PTEarth {
 
@@ -53,7 +54,7 @@ namespace PTEarth {
         m_Longitude += deltaLongitude;
         m_Latitude += deltaLatitude;
         // Clamp latitude to avoid gimbal lock
-        m_Latitude = glm::clamp(m_Latitude, -PI / 2 + 0.01, PI / 2 - 0.01);
+        m_Latitude = glm::clamp(m_Latitude, -PTMath::OnePi / 2 + 0.01, PTMath::OnePi / 2 - 0.01);
         RecalculateViewMatrix();
     }
 
@@ -66,7 +67,7 @@ namespace PTEarth {
         m_Heading += deltaHeading;
         m_Pitch += deltaPitch;
         // Clamp pitch
-        m_Pitch = glm::clamp(m_Pitch, -PI / 2 + 0.01, 0.0);
+        m_Pitch = glm::clamp(m_Pitch, -PTMath::OnePi / 2 + 0.01, 0.0);
         RecalculateViewMatrix();
     }
 
@@ -91,7 +92,7 @@ namespace PTEarth {
 
         // Apply heading and pitch rotation
         glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), (float)m_Heading, glm::vec3(0, 0, 1)) *
-            glm::rotate(glm::mat4(1.0f), (float)m_Pitch + PI / 2, glm::vec3(1, 0, 0));
+            glm::rotate(glm::mat4(1.0f), (float)m_Pitch + PTMath::OnePi / 2, glm::vec3(1, 0, 0));
 
         m_ViewMatrix = m_ViewMatrix * rotation;
         m_ViewProjection = m_Projection * m_ViewMatrix;
