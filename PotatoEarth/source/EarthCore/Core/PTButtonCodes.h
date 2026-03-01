@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 namespace PTEarth {
 	enum PTEarth_Button {
 		PTEARTH_MOUSE_BUTTON_NONE = -1,

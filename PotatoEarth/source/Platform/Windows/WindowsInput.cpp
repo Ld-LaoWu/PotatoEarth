@@ -1,4 +1,4 @@
-#include "potatopch.h"
+﻿#include "potatopch.h"
 #include "EarthCore/Core/PTInput.h"
 #include "EarthCore/Core/Application.h"
 #include "Platform/Windows/WindowsWindow.h"

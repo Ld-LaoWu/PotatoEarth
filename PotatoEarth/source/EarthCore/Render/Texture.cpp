@@ -1,4 +1,4 @@
-#include "potatopch.h"
+﻿#include "potatopch.h"
 #include "Texture.h"
 
 #include "Platform/Opengl/OpenGLTexture.h"

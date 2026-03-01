@@ -1,4 +1,4 @@
-#include "potatopch.h"
+﻿#include "potatopch.h"
 #include "VertexArray.h"
 
 #include "Platform/Opengl/OpenGLVertexArray.h"

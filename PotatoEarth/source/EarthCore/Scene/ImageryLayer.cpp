@@ -1,4 +1,4 @@
-#include "potatopch.h"
+﻿#include "potatopch.h"
 #include "ImageryLayer.h"
 
 namespace PTEarth {

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "PotatoEarthBase.h"
 #include "spdlog/spdlog.h"
 #include "spdlog/fmt/ostr.h"

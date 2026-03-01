@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "PotatoEarthBase.h"
 #include "EarthCore/Event/Event.h"
 #include "EarthCore/Render/GraphicsWindow.h"

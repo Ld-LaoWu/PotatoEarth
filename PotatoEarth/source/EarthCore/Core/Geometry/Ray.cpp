@@ -1,4 +1,4 @@
-#include "potatopch.h"
+﻿#include "potatopch.h"
 #include "Ray.h"
 #include "EarthCore/Core/Utility/Math/PTMath.h"
 

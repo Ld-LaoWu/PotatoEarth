@@ -1,21 +1,24 @@
--- 核心库
+-- PotatoEarth Project
 project "PotatoEarth"
-	-- location "PotatoEarth" -- 位置
 	cppdialect "C++17"
-	kind "SharedLib" -- dll
-	--kind "StaticLib"
+	kind "SharedLib"
 	language "C++"
 	staticruntime "on"
  
-	targetdir("%{wks.location}/BuildResult/exec/" .. outputdir .. "/%{prj.name}" ) -- 输出的路径
-	objdir("%{wks.location}/BuildResult/mid/" .. outputdir .. "/%{prj.name}" ) -- 中间文件输出的路径
+	targetdir("%{wks.location}/BuildResult/exec/" .. outputdir .. "/%{prj.name}")
+	objdir("%{wks.location}/BuildResult/mid/" .. outputdir .. "/%{prj.name}")
 
-	--预编译文件
+	-- Precompiled header
 	pchheader "potatopch.h"
 	pchsource "%{wks.location}/PotatoEarth/source/potatopch.cpp"
 
+	-- UTF-8 encoding
+	flags { "MultiProcessorCompile" }
+	buildoptions { "/utf-8" }
+
 	defines
 	{
+		"PTEARTH_PLATFORM_WINDOWS",
 		"PT_BUILD_DLL"
 	}
 
@@ -27,48 +30,30 @@ project "PotatoEarth"
 
 	includedirs
 	{
-		"%{wks.location}/PotatoEarth/extern/stb",
-		"source",
-		"%{wks.location}/PotatoEarth/extern/glm",
 		"%{wks.location}/PotatoEarth/extern/spdlog/include",
-		"%{wks.location}/PotatoEarth/extern/Glad/include",
-		"%{wks.location}/PotatoEarth/extern/ImGui",
-		"%{wks.location}/PotatoEarth/extern/ImGui/backends"
+		"%{wks.location}/PotatoEarth/extern/stb",
+		"%{wks.location}/PotatoEarth/extern/glm",
+		"source"
 	}
 
-	links 
+	links
 	{
 		"Glad",
-		"ImGui",
-		"opengl32.lib"
+		"ImGui"
 	}
 
-	filter "system:windows"
-		cppdialect "C++17"
-		systemversion "latest"
-        -- buildoptions { "/wd4251" }
-		defines
-		{
-			"PTEARTH_PLATFORM_WINDOWS", -- 不同渲染库
-			"PTEARTH_DYNAMIC_LINK"
-		}
-		
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} \"../BuildResult/exec/" .. outputdir .. "/PotatoEarth-Qt/\"")
-		}
-
 	filter "configurations:Debug"
-		defines { "PO_DEBUG" }
-		runtime "Debug"
+		defines "PT_DEBUG"
 		symbols "On"
 
 	filter "configurations:Release"
-		defines { "PO_RELEASE" }
-		runtime "Release"
+		defines "PT_RELEASE"
 		optimize "On"
 
 	filter "configurations:Dist"
-		defines { "PO_DIST" }
-		runtime "Release"
+		defines "PT_DIST"
 		optimize "On"
+
+	filter {}
+
+

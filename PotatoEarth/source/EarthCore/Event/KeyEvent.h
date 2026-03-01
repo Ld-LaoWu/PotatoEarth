@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "Event.h"
 
 namespace PTEarth {
@@ -20,7 +20,7 @@ namespace PTEarth {
 		std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "¼üÅÌ°´ÏÂ:" << m_KeyCode << "(repeat = " << m_isRepeat << ")";
+			ss << "ï¿½ï¿½ï¿½Ì°ï¿½ï¿½ï¿½:" << m_KeyCode << "(repeat = " << m_isRepeat << ")";
 			return ss.str();
 		}
 
@@ -35,7 +35,7 @@ namespace PTEarth {
 		std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "¼üÅÌ°´ÏÂÍµÌ§Æð:" << m_KeyCode ;
+			ss << "ï¿½ï¿½ï¿½Ì°ï¿½ï¿½ï¿½ÍµÌ§ï¿½ï¿½:" << m_KeyCode ;
 			return ss.str();
 		}
 

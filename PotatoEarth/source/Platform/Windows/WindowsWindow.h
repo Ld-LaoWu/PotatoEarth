@@ -1,12 +1,12 @@
-#pragma once
+ï»¿#pragma once
 
 #include "EarthCore/Render/GraphicsWindow.h"
 #include "EarthCore/Render/GraphicsContext.h"
 #include "EarthCore/Event/WindowEvent.h"
 
 
-// windows Æ½Ì¨ÏÂµÄAPI ³éÏó
-// ¸ù¾Ý µ×²ãAPI µÄ²»Í¬
+// windows Æ½Ì¨ï¿½Âµï¿½API ï¿½ï¿½ï¿½ï¿½
+// ï¿½ï¿½ï¿½ï¿½ ï¿½×²ï¿½API ï¿½Ä²ï¿½Í¬
 
 namespace PTEarth {
 	class PTWindow;
@@ -20,7 +20,7 @@ namespace PTEarth {
 		inline unsigned int GetWidth() const override { return m_Data.Width; }
 		inline unsigned int GetHeight() const override { return m_Data.Height; }
 
-		// ´°¿ÚµÄÊôÐÔ
+		// ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½
 		void SetVSync(bool enabled) override;
 		bool IsVSync() const override;
 

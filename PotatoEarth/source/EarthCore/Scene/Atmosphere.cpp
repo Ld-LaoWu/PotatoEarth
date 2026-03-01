@@ -1,4 +1,4 @@
-#include "potatopch.h"
+﻿#include "potatopch.h"
 #include "Atmosphere.h"
 
 #include "EarthCore/Render/Buffer.h"

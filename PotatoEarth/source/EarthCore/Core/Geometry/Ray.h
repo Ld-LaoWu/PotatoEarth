@@ -1,17 +1,17 @@
-#pragma once
+ï»¿#pragma once
 #include "EarthCore/Core/PotatoEarthBase.h"
 #include <glm/vec3.hpp>
 
 namespace PTEarth {
 	/**
-	* @brief ÉäÏß
+	* @brief ï¿½ï¿½ï¿½ï¿½
 	*/
 	class PTEARTH_API Ray final
 	{
 	public:
 		Ray() = default;
 		/**
-		* @brief ¹¹½¨Ò»ÌõÉäÏß
+		* @brief ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		*/
 		Ray(const glm::dvec3& origin, const glm::dvec3& direction);
 		const glm::dvec3& getOrigin() const noexcept { return  m_Origin; }

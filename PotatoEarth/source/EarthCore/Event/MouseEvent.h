@@ -1,9 +1,9 @@
-#pragma once
+ï»¿#pragma once
 #include "Event.h"
 
 namespace PTEarth {
 
-	// Êó±êÒÆ¶¯¼à²â
+	// ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½
 	class PTEARTH_API MouseMovedEvent : public Event {
 	public:
 		MouseMovedEvent(const float x, const float y)
@@ -15,7 +15,7 @@ namespace PTEarth {
 
 		virtual std::string ToString() const override { 
 			std::stringstream outss;
-			outss << "Êó±êÒÆ¶¯:( " << m_MouseX << "," << m_MouseY << " )";
+			outss << "ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½:( " << m_MouseX << "," << m_MouseY << " )";
 			return outss.str();
 		}
 
@@ -32,7 +32,7 @@ namespace PTEarth {
 
 		virtual std::string ToString() const override {
 			std::stringstream outss;
-			outss << "Êó±ê¹öÂÖ:( " << m_Delta << " )";
+			outss << "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:( " << m_Delta << " )";
 			return outss.str();
 		}
 
@@ -62,7 +62,7 @@ namespace PTEarth {
 
 		virtual std::string ToString() const override {
 			std::stringstream outss;
-			outss << "Êó±ê°´ÏÂ:( " << m_Button << " )";
+			outss << "ï¿½ï¿½ê°´ï¿½ï¿½:( " << m_Button << " )";
 			return outss.str();
 		}
 		EVENT_CLASS_TYPE(MousePressed)
@@ -76,7 +76,7 @@ namespace PTEarth {
 
 		virtual std::string ToString() const override {
 			std::stringstream outss;
-			outss << "Êó±êÌ§Æð:( " << m_Button << " )";
+			outss << "ï¿½ï¿½ï¿½Ì§ï¿½ï¿½:( " << m_Button << " )";
 			return outss.str();
 		}
 		EVENT_CLASS_TYPE(MouseReleased)

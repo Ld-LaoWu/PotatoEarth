@@ -1,4 +1,4 @@
-#include "potatopch.h"
+﻿#include "potatopch.h"
 #include "Buffer.h"
 
 #include "Platform/Opengl/OpenGLBuffer.h"

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <memory>
 
 
@@ -13,16 +13,16 @@
 	#define PTEARTH_API
 #endif
 #else
-	#error ÍÁ¶¹µØÇò½öÖ§³ÖwindowsÆ½Ì¨
+	#error ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½windowsÆ½Ì¨
 #endif // PTEARTH_PLATFORM_WINDOWS
 
-// deugger°æ±¾
+// deuggerï¿½æ±¾
 #ifdef PO_DEBUG
 	#define PTEARTH_ENBLE_ASSERTS
 #endif 
 
 #ifdef PTEARTH_ENBLE_ASSERTS
-	#define PTEARTH_ENGINGE_ASSERT(x,...){if (!(x)) { PT_EARTH_ERROR("ÒâÍâ´íÎó:{0}",__VA_ARGS__);__debugbreak(); }}
+	#define PTEARTH_ENGINGE_ASSERT(x,...){if (!(x)) { PT_EARTH_ERROR("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:{0}",__VA_ARGS__);__debugbreak(); }}
 #else
 	#define PTEARTH_ENGINGE_ASSERT(x,...)
 #endif
@@ -31,7 +31,7 @@
 #define BIT(x) (1 << x )
 #define PT_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
 
-// earthÀïÃæ ÄÚ²¿¹ÜÀíÍ³¼ÆÖ¸ÕëÊ¹ÓÃ
+// earthï¿½ï¿½ï¿½ï¿½ ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½Í³ï¿½ï¿½Ö¸ï¿½ï¿½Ê¹ï¿½ï¿½
 
 namespace PTEarth 
 {

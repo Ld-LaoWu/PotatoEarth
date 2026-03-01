@@ -1,4 +1,4 @@
-#include "potatopch.h"
+ï»¿#include "potatopch.h"
 #include "EarthCore/Core/PotatoEarthBase.h"
 #include "OpenGLContext.h"
 #include "EarthCore/Core/PTWindow.h"
@@ -8,17 +8,17 @@ namespace PTEarth {
 	OpenGLContext::OpenGLContext(PTWindow* windowHandle)
 		:m_WindowHandle(windowHandle)
 	{
-		PTEARTH_ENGINGE_ASSERT(windowHandle, "´°¿ÚµÄ¾ä±úÎª¿Õ")
+		PTEARTH_ENGINGE_ASSERT(windowHandle, "ï¿½ï¿½ï¿½ÚµÄ¾ï¿½ï¿½Îªï¿½ï¿½")
 	}
 	void OpenGLContext::Init()
 	{
 		wglMakeCurrent(m_WindowHandle->GetHDC(), m_WindowHandle->GetHGLRC());
-		// ³õÊ¼»¯ GLAD
+		// ï¿½ï¿½Ê¼ï¿½ï¿½ GLAD
 		if (!gladLoadGL()) {
-			PTEARTH_ENGINGE_ASSERT(false, "³õÊ¼»¯GLADÊ§°Ü!")
+			PTEARTH_ENGINGE_ASSERT(false, "ï¿½ï¿½Ê¼ï¿½ï¿½GLADÊ§ï¿½ï¿½!")
 		}
 
-		PT_EARTH_INFO ("OpenGL ÐÅÏ¢£º");
+		PT_EARTH_INFO ("OpenGL ï¿½ï¿½Ï¢ï¿½ï¿½");
 		PT_EARTH_INFO("OpenGL Vendor GPU:{0}", (char*)glGetString(GL_VENDOR));
 		PT_EARTH_INFO("OpenGL Render GPU:{0}", (char*)glGetString(GL_RENDERER));
 		PT_EARTH_INFO("OpenGL Version GPU:{0}", (char*)glGetString(GL_VERSION));

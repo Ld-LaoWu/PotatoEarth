@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Blending.h"
 #include "ColorMask.h"

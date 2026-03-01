@@ -1,27 +1,27 @@
-#pragma once
+ï»¿#pragma once
 #include "potatopch.h"
 #include "EarthCore/Core/PotatoEarthBase.h"
 
 
-// »ù´¡ÊÂ¼þÀà
+// ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½
 namespace PTEarth {
 
-	// ÊÂ¼þÀàÐÍ
+	// ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½
 	enum class EventType
 	{
 		None = 0,
 		WindowClosed, WindowResized,
-		// Êó±ê
-		MousePressed, MouseReleased,   //¸½´ø¼üÖµ
+		// ï¿½ï¿½ï¿½
+		MousePressed, MouseReleased,   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
 		MouseMoved,MouseWheeled, // 
-		// ¼üÅÌÊäÈëÊÂ¼þ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 		KeyPressed, KeyReleased
-		// ¼üÅÌ
+		// ï¿½ï¿½ï¿½ï¿½
 
-		// ÆäËû
+		// ï¿½ï¿½ï¿½ï¿½
 	};
 
-	// ÊÂ¼þ·ÖÀà
+	// ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½
 	enum EventCategory
 	{
 		None = 0,
@@ -33,7 +33,7 @@ namespace PTEarth {
 	};
 
 
-	// Ê¹ÓÃºê¼ò»¯
+	// Ê¹ï¿½Ãºï¿½ï¿½
 #define EVENT_CLASS_TYPE(type) static EventType GetStaticEventType() { return EventType::type; }\
                                 virtual EventType GetEventType() const override { return GetStaticEventType();}\
 								virtual const char* GetEventName() const override { return #type;}
@@ -61,7 +61,7 @@ namespace PTEarth {
 		
 	};
 
-	// ÊÂ¼þ·Ö·¢
+	// ï¿½Â¼ï¿½ï¿½Ö·ï¿½
 	class PTEARTH_API EventDispatcher {
 		template<typename T>
 		using EventFn = std::function<bool(T&)>;

@@ -1,4 +1,4 @@
-#include "potatopch.h"
+﻿#include "potatopch.h"
 #include "Ellipsoid.h"
 
 #include <glm/geometric.hpp>

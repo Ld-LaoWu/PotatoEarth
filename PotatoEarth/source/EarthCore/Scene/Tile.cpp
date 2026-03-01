@@ -1,4 +1,4 @@
-#include "potatopch.h"
+﻿#include "potatopch.h"
 #include "Tile.h"
 #include "EarthCore/Render/Buffer.h"
 #include "EarthCore/Core/Geospatial/Ellipsoid.h"

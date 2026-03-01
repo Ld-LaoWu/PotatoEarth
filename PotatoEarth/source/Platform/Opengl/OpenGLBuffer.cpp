@@ -1,4 +1,4 @@
-#include "potatopch.h"
+﻿#include "potatopch.h"
 #include "OpenGLBuffer.h"
 
 #include <glad/glad.h>

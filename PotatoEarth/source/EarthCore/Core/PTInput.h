@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "EarthCore/Core/PotatoEarthBase.h"
 #include "EarthCore/Core/PTKeyCodes.h"
 #include "EarthCore/Core/PTButtonCodes.h"

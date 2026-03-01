@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "EarthCore/Render/Shader.h"
 #include <glad/glad.h>

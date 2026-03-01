@@ -1,4 +1,4 @@
-#include "potatopch.h"
+﻿#include "potatopch.h"
 #include "Application.h"
 
 #include "EarthCore/Event/WindowEvent.h"
