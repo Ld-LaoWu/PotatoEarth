@@ -4,69 +4,163 @@
 #include "EarthCore/Event/WindowEvent.h"
 #include "EarthCore/Event/KeyEvent.h"
 #include "EarthCore/Event/MouseEvent.h"
-
 #include "EarthCore/Core/PTInput.h"
 #include "PTKeyCodes.h"
 #include "PTButtonCodes.h"
 
+#include "EarthCore/Scene/Scene.h"
+#include "EarthCore/Scene/Entity.h"
+#include "EarthCore/Scene/EarthGlobe.h"
+#include "EarthCore/Render/Camera.h"
+#include "EarthCore/Core/Log.h"
+
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
 namespace PTEarth {
-	Application* Application::S_Instance = nullptr;
+    Application* Application::S_Instance = nullptr;
 
-	Application::Application(const HDC& inHDC)
-	{
+    Application::Application(const HDC& inHDC)
+    {
+        PTEARTH_ENGINGE_ASSERT(!S_Instance, "App already exists!");
+        S_Instance = this;
 
-		PTEARTH_ENGINGE_ASSERT(!S_Instance, "App已经创建!");
-		S_Instance = this;
+        // Create window
+        m_Window = GraphicsWindow::Create(WindowProps(inHDC));
+        m_Window->SetVSync(true);
 
-		// 窗口设置
-		m_Window = GraphicsWindow::Create(inHDC);
-		// m_Window->SetEventCallback(PT_BIND_EVENT_FN(Application::onEvent)); 
-		m_Window->SetVSync(true);
-		
+        // Initialize scene
+        InitializeScene();
+    }
 
-		// 渲染设置
-	}
-	Application::~Application()
-	{
-	}
+    Application::~Application()
+    {
+    }
 
-	void Application::onEvent(Event& e)
-	{
-		EventDispatcher dispatcher(e);
+    void Application::InitializeScene() {
+        // Create scene
+        m_Scene = CreateRef<Scene>();
 
-		dispatcher.Dispatch<WindowCloseEvent>(PT_BIND_EVENT_FN(Application::onWindowClose));
-		dispatcher.Dispatch<WindowResizedEvent>(PT_BIND_EVENT_FN(Application::onWindowResized));
+        // Create camera
+        float aspectRatio = 1280.0f / 720.0f; // Default aspect
+        m_Camera = CreateRef<EarthOrbitCamera>(aspectRatio);
+        m_Scene->SetActiveCamera(m_Camera);
 
-		m_Window->onWindowsEvent(e);
+        // Create Earth globe
+        m_EarthGlobe = CreateRef<EarthGlobe>();
+        m_EarthGlobe->Initialize();
 
-	}
-	void Application::Close()
-	{
-		m_Runing = false;
-	}
-	void Application::Run()
-	{
-		m_Window->OnUpdate();
+        // Add Earth to scene
+        Entity earthEntity = m_Scene->CreateEntity("Earth");
+        earthEntity.SetTransform(TransformComponent(glm::mat4(1.0f)));
+        
+        // Create mesh for Earth
+        MeshComponent earthMesh;
+        earthMesh.VertexArray = m_EarthGlobe->GetVertexArray();
+        earthMesh.Shader = m_EarthGlobe->GetShader();
+        earthMesh.Color = glm::vec4(0.2f, 0.4f, 0.8f, 1.0f);
+        earthEntity.SetMesh(earthMesh);
 
-		if (PTInput::IsKeyPressed((int)PTEarth_Key::Key_A) ){
-			PT_EARTH_INFO("A键按下");
-		}
-		if (PTInput::IsMouseButtonPressed(PTEarth_Button::PTEARTH_MOUSE_BUTTON_LEFT)) {
-			PT_EARTH_INFO("鼠标左键键按下");
-		}
-	}
-	bool Application::onWindowClose(WindowCloseEvent& e)
-	{
-		m_Runing = false;
-		return true;
-	}
-	bool Application::onWindowResized(WindowResizedEvent& e)
-	{
-		if (e.GetWidth() == 0 || e.GetHeight() == 0)
-		{
-			return false;
-		}
+        PT_EARTH_INFO("Scene initialized with Earth");
+    }
 
-		return false;
-	}
+    void Application::onEvent(Event& e)
+    {
+        EventDispatcher dispatcher(e);
+
+        dispatcher.Dispatch<WindowCloseEvent>(PT_BIND_EVENT_FN(Application::onWindowClose));
+        dispatcher.Dispatch<WindowResizedEvent>(PT_BIND_EVENT_FN(Application::onWindowResized));
+
+        m_Window->onWindowsEvent(e);
+    }
+
+    void Application::Close()
+    {
+        m_Running = false;
+    }
+
+    void Application::Run()
+    {
+        // Calculate delta time
+        float time = (float)glfwGetTime();
+        float deltaTime = time - m_LastFrameTime;
+        m_LastFrameTime = time;
+
+        // Update
+        OnUpdate();
+
+        // Render
+        OnRender();
+    }
+
+    void Application::OnUpdate() {
+        // Calculate delta time
+        float time = (float)glfwGetTime();
+        static float lastTime = 0.0f;
+        float deltaTime = time - lastTime;
+        lastTime = time;
+
+        // Update scene
+        if (m_Scene) {
+            m_Scene->OnUpdate(deltaTime);
+        }
+
+        // Camera controls
+        if (auto* orbitCam = dynamic_cast<EarthOrbitCamera*>(m_Camera.get())) {
+            if (PTInput::IsKeyPressed((int)PTEarth_Key::Key_W)) {
+                orbitCam->Zoom(-100000.0f);
+            }
+            if (PTInput::IsKeyPressed((int)PTEarth_Key::Key_S)) {
+                orbitCam->Zoom(100000.0f);
+            }
+            if (PTInput::IsKeyPressed((int)PTEarth_Key::Key_A)) {
+                orbitCam->Orbit(-0.01f, 0.0f);
+            }
+            if (PTInput::IsKeyPressed((int)PTEarth_Key::Key_D)) {
+                orbitCam->Orbit(0.01f, 0.0f);
+            }
+        }
+    }
+
+    void Application::OnRender() {
+        // Clear
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+        glEnable(GL_DEPTH_TEST);
+
+        // Render scene
+        if (m_Scene && m_Camera) {
+            m_Scene->OnRender(*m_Camera);
+        }
+
+        // Swap buffers
+        m_Window->OnUpdate();
+    }
+
+    void Application::OnImGuiRender() {
+        // ImGui rendering can be added here
+    }
+
+    bool Application::onWindowClose(WindowCloseEvent& e)
+    {
+        m_Running = false;
+        return true;
+    }
+
+    bool Application::onWindowResized(WindowResizedEvent& e)
+    {
+        if (e.GetWidth() == 0 || e.GetHeight() == 0)
+        {
+            return false;
+        }
+
+        glViewport(0, 0, e.GetWidth(), e.GetHeight());
+
+        // Update camera aspect ratio
+        if (auto* orbitCam = dynamic_cast<EarthOrbitCamera*>(m_Camera.get())) {
+            orbitCam->SetViewportSize((float)e.GetWidth(), (float)e.GetHeight());
+        }
+
+        return false;
+    }
 }

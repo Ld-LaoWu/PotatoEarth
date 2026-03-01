@@ -3,35 +3,52 @@
 #include "EarthCore/Event/Event.h"
 #include "EarthCore/Render/GraphicsWindow.h"
 
-
-// ×éÖ¯²ã
 namespace PTEarth {
-	class WindowResizedEvent;
-	class WindowCloseEvent;
-	class PTEARTH_API Application 
-	{
-	public:
-		Application(const HDC& inHDC);
-		virtual ~Application();
+    class WindowResizedEvent;
+    class WindowCloseEvent;
+    class Scene;
+    class Camera;
+    class EarthGlobe;
 
-		void onEvent(Event& e);
-		
-		void Close();
-		void Run();
+    class PTEARTH_API Application 
+    {
+    public:
+        Application(const HDC& inHDC);
+        virtual ~Application();
 
-		inline GraphicsWindow& GetGraphicWidow() { return *m_Window; }
-		inline static Application& Get() { return *S_Instance; }
+        void onEvent(Event& e);
+        void Close();
+        void Run();
 
-	private:
-		bool onWindowClose(WindowCloseEvent& e);
-		bool onWindowResized(WindowResizedEvent& e);
+        // New rendering methods
+        void OnUpdate();
+        void OnRender();
+        void OnImGuiRender();
 
-	private:
-		std::unique_ptr<GraphicsWindow> m_Window;
-		bool m_Runing = true;
+        inline GraphicsWindow& GetGraphicWindow() { return *m_Window; }
+        inline static Application& Get() { return *S_Instance; }
 
-		static Application* S_Instance;
-	};
+        PT_Ref<Scene> GetScene() { return m_Scene; }
+        PT_Ref<Camera> GetCamera() { return m_Camera; }
 
-	Application* CreateApplication(const HDC& inHDC);
+    private:
+        bool onWindowClose(WindowCloseEvent& e);
+        bool onWindowResized(WindowResizedEvent& e);
+
+        void InitializeScene();
+
+    private:
+        std::unique_ptr<GraphicsWindow> m_Window;
+        bool m_Running = true;
+        static Application* S_Instance;
+
+        // New members
+        PT_Ref<Scene> m_Scene;
+        PT_Ref<Camera> m_Camera;
+        PT_Ref<EarthGlobe> m_EarthGlobe;
+
+        float m_LastFrameTime = 0.0f;
+    };
+
+    Application* CreateApplication(const HDC& inHDC);
 }
