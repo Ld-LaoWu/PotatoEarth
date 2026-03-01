@@ -16,7 +16,7 @@
 #include "EarthCore/Core/Log.h"
 
 #include <glad/glad.h>
-#include <GLFW/glfw3.h>
+
 
 namespace PTEarth {
     Application* Application::S_Instance = nullptr;
@@ -77,7 +77,7 @@ namespace PTEarth {
     void Application::Run()
     {
         // Calculate delta time
-        float time = (float)glfwGetTime();
+        float time = (float)(float)GetTickCount() / 1000.0f;
         float deltaTime = time - m_LastFrameTime;
         m_LastFrameTime = time;
 
@@ -90,7 +90,7 @@ namespace PTEarth {
 
     void Application::OnUpdate() {
         // Calculate delta time
-        float time = (float)glfwGetTime();
+        float time = (float)(float)GetTickCount() / 1000.0f;
         static float lastTime = 0.0f;
         float deltaTime = time - lastTime;
         lastTime = time;

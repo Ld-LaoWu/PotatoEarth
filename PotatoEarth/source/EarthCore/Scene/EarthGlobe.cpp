@@ -5,7 +5,7 @@
 #include "EarthCore/Core/Utility/Math/PTMath.h"
 #include <glad/glad.h>
 #include <glm/gtc/matrix_transform.hpp>
-#include <math>
+#include <math.h>
 
 namespace PTEarth {
 

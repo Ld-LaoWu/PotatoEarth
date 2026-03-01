@@ -1,15 +1,15 @@
 #include "potatopch.h"
 #include "Tile.h"
-
 #include "EarthCore/Render/Buffer.h"
 #include "EarthCore/Core/Geospatial/Ellipsoid.h"
+#include "EarthCore/Core/Utility/Math/PTMath.h"
 #include <glad/glad.h>
-#include <math>
+#include <math.h>
 
 namespace PTEarth {
 
     Tile::Tile(const TileID& id)
-        : m_ID(id) {
+        : m_ID(id), m_State(TileState::Unloaded) {
         CalculateBounds();
     }
 
@@ -22,18 +22,16 @@ namespace PTEarth {
     }
 
     void Tile::CalculateBounds() {
-        // Web Mercator tile system
-        int n = 1 << m_ID.Level; // 2^level
+        int n = 1 << m_ID.Level;
 
-        double lonWest = (m_ID.X / (double)n) * 2.0 * PI - PI;
-        double lonEast = ((m_ID.X + 1) / (double)n) * 2.0 * PI - PI;
+        double lonWest = (m_ID.X / (double)n) * 2.0 * PTMath::OnePi - PTMath::OnePi;
+        double lonEast = ((m_ID.X + 1) / (double)n) * 2.0 * PTMath::OnePi - PTMath::OnePi;
 
-        // Mercator Y to latitude
-        double mercatorY = PI * (1.0 - 2.0 * m_ID.Y / (double)n);
-        double latNorth = glm::atan(glm::sinh(mercatorY));
+        double mercatorY_n = PTMath::OnePi * (1 - 2 * m_ID.Y / (double)n);
+        double mercatorY_s = PTMath::OnePi * (1 - 2 * (m_ID.Y + 1) / (double)n);
         
-        mercatorY = PI * (1.0 - 2.0 * (m_ID.Y + 1) / (double)n);
-        double latSouth = glm::atan(glm::sinh(mercatorY));
+        double latNorth = atan(sinh(mercatorY_n));
+        double latSouth = atan(sinh(mercatorY_s));
 
         m_Southwest = Cartographic(lonWest, latSouth, 0.0);
         m_Northeast = Cartographic(lonEast, latNorth, 0.0);
@@ -43,9 +41,8 @@ namespace PTEarth {
         std::vector<float> vertices;
         std::vector<uint32_t> indices;
 
-        const uint32_t segments = 16; // Segments per tile edge
+        const uint32_t segments = 8;
 
-        // Generate grid of vertices
         for (uint32_t y = 0; y <= segments; ++y) {
             double latFrac = y / (double)segments;
             double lat = m_Southwest.latitude * (1.0 - latFrac) + m_Northeast.latitude * latFrac;
@@ -54,14 +51,12 @@ namespace PTEarth {
                 double lonFrac = x / (double)segments;
                 double lon = m_Southwest.longitude * (1.0 - lonFrac) + m_Northeast.longitude * lonFrac;
 
-                // Position on WGS84 ellipsoid surface
                 Cartographic carto(lon, lat, 0.0);
                 glm::dvec3 pos = Ellipsoid::WGS84.cartographicToCartesian(carto);
                 glm::dvec3 normal = Ellipsoid::WGS84.geodeticSurfaceNormal(carto);
 
-                // Texture coordinates
-                float u = lonFrac;
-                float v = latFrac;
+                float u = (float)lonFrac;
+                float v = (float)latFrac;
 
                 vertices.push_back((float)pos.x);
                 vertices.push_back((float)pos.y);
@@ -74,7 +69,6 @@ namespace PTEarth {
             }
         }
 
-        // Generate indices
         for (uint32_t y = 0; y < segments; ++y) {
             for (uint32_t x = 0; x < segments; ++x) {
                 uint32_t current = y * (segments + 1) + x;
@@ -90,7 +84,6 @@ namespace PTEarth {
             }
         }
 
-        // Create buffers
         m_VertexArray = VertexArray::Create();
 
         PT_Ref<VertexBuffer> vb = VertexBuffer::Create(vertices.data(), (uint32_t)(vertices.size() * sizeof(float)));
@@ -121,7 +114,7 @@ namespace PTEarth {
     }
 
     TileID Tile::GetChild(int index) const {
-        int childX = m_ID.X * 2 + (index % 2); // 0,1 = SW,SE; 2,3 = NW,NE
+        int childX = m_ID.X * 2 + (index % 2);
         int childY = m_ID.Y * 2 + (index / 2);
         return TileID(m_ID.Level + 1, childX, childY);
     }

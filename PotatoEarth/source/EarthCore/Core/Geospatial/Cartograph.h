@@ -6,7 +6,7 @@ namespace PTEarth{
 	{
 	public:
 		// ����ʵ��
-		constexpr Cartographic(
+		constexpr Cartographic() noexcept : longitude(0.0), latitude(0.0), height(0.0) {}\n\t\tconstexpr Cartographic(
 			double longitudeRadians,
 			double latitudeRadians,
 			double heightMeters = 0.0) noexcept

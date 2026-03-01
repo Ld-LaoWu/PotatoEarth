@@ -92,7 +92,7 @@ namespace PTEarth {
 
         // Apply heading and pitch rotation
         glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), (float)m_Heading, glm::vec3(0, 0, 1)) *
-            glm::rotate(glm::mat4(1.0f), (float)m_Pitch + PTMath::OnePi / 2, glm::vec3(1, 0, 0));
+            glm::rotate(glm::mat4(1.0f), (float)(m_Pitch + PTMath::OnePi / 2.0), glm::vec3(1.0f, 0.0f, 0.0f));
 
         m_ViewMatrix = m_ViewMatrix * rotation;
         m_ViewProjection = m_Projection * m_ViewMatrix;

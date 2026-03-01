@@ -7,13 +7,13 @@ namespace PTEarth {
 
 	bool PTInput::IsKeyPressed(int keyCode)
 	{
-		auto window = static_cast<WindowsWindow*>(&Application::Get().GetGraphicWidow());
+		auto window = static_cast<WindowsWindow*>(&Application::Get().GetGraphicWindow());
 		return window->PTKeyPressed(keyCode);
 	}
 
 	bool PTInput::IsMouseButtonPressed(int button)
 	{
-		auto window = static_cast<WindowsWindow*>(&Application::Get().GetGraphicWidow());
+		auto window = static_cast<WindowsWindow*>(&Application::Get().GetGraphicWindow());
 		return window->PTMouseButtonPressed(button);
 	}
 }

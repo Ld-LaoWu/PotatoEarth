@@ -77,3 +77,4 @@ project "PotatoEarth-Qt"
 		kind "WindowedApp"
 		runtime "Release"
 		optimize "On"
+
