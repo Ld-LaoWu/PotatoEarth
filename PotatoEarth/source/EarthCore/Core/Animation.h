@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include "EarthCore/Core/PotatoEarthBase.h"
 #include <glm/glm.hpp>

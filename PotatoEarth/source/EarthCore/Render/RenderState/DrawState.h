@@ -1,10 +1,10 @@
-﻿#pragma once
-
-// 
-namespace PTEarth {
-	
-	class DrawState
-	{
-
-	};
+#pragma once
+
+// 
+namespace PTEarth {
+	
+	class DrawState
+	{
+
+	};
 }

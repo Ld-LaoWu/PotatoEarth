@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "EarthCore/Core/PotatoEarthBase.h"
+#include "EarthCore/Render/VertexArray.h"
 #include "EarthCore/Render/Shader.h"
 #include <glm/glm.hpp>
 
@@ -61,3 +62,4 @@ namespace PTEarth {
     };
 
 }
+

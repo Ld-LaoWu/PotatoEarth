@@ -1,4 +1,4 @@
-﻿#include "potatopch.h"
+#include "potatopch.h"
 #include "PostProcessing.h"
 
 #include <glad/glad.h>
@@ -56,4 +56,4 @@ namespace PTEarth {
         Invalidate();
     }
 
-}
+}

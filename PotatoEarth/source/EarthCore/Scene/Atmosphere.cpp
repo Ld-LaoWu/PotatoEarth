@@ -1,4 +1,5 @@
 ﻿#include "potatopch.h"
+#include "EarthCore/Core/Utility/Math/PTMath.h"
 #include "Atmosphere.h"
 
 #include "EarthCore/Render/Buffer.h"
@@ -248,3 +249,4 @@ namespace PTEarth {
     }
 
 }
+

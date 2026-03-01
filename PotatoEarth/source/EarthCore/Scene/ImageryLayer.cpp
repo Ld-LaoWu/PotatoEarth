@@ -1,4 +1,7 @@
 ﻿#include "potatopch.h"
+#include <queue>
+#include <future>
+#include <mutex>
 #include "ImageryLayer.h"
 
 namespace PTEarth {

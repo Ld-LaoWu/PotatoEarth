@@ -8,18 +8,17 @@ project "PotatoEarth"
 	targetdir("%{wks.location}/BuildResult/exec/" .. outputdir .. "/%{prj.name}")
 	objdir("%{wks.location}/BuildResult/mid/" .. outputdir .. "/%{prj.name}")
 
-	-- Precompiled header
 	pchheader "potatopch.h"
 	pchsource "%{wks.location}/PotatoEarth/source/potatopch.cpp"
 
-	-- UTF-8 encoding
 	flags { "MultiProcessorCompile" }
-	buildoptions { "/utf-8" }
+	buildoptions { "/utf-8", "/wd4251" }
 
 	defines
 	{
 		"PTEARTH_PLATFORM_WINDOWS",
-		"PT_BUILD_DLL"
+		"PT_BUILD_DLL",
+		"_CRT_SECURE_NO_WARNINGS"
 	}
 
 	files
@@ -30,9 +29,10 @@ project "PotatoEarth"
 
 	includedirs
 	{
-		"%{wks.location}/PotatoEarth/extern/spdlog/include",
+		"%{wks.location}/PotatoEarth/extern/Glad/include",
 		"%{wks.location}/PotatoEarth/extern/stb",
 		"%{wks.location}/PotatoEarth/extern/glm",
+		"%{wks.location}/PotatoEarth/extern/spdlog/include",
 		"source"
 	}
 
@@ -55,5 +55,4 @@ project "PotatoEarth"
 		optimize "On"
 
 	filter {}
-
 
