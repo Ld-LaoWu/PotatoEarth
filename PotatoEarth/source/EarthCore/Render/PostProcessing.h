@@ -73,11 +73,11 @@ namespace PTEarth {
         void ApplyEffects(uint32_t effects);
 
         // Individual effects
-        void BloomPass(Texture2D& input);
-        void SSAOPass(Texture2D& depth, Texture2D& normal);
-        void SSRPass(Texture2D& color, Texture2D& depth, Texture2D& normal);
-        void ToneMappingPass(Texture2D& input);
-        void FXAAPass(Texture2D& input);
+        void BloomPass(Texture& input);
+        void SSAOPass(Texture& depth, Texture& normal);
+        void SSRPass(Texture& color, Texture& depth, Texture& normal);
+        void ToneMappingPass(Texture& input);
+        void FXAAPass(Texture& input);
 
         // Settings
         void SetBloomIntensity(float intensity) { m_BloomIntensity = intensity; }
@@ -112,4 +112,5 @@ namespace PTEarth {
     };
 
 }
+
 

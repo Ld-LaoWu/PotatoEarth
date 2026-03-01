@@ -53,17 +53,17 @@ namespace PTEarth {
             uniform float u_GroundRadius;
             uniform float u_AtmosphereRadius;
             
-            const float PI = 3.14159265359;
+            const float PTMath::OnePi = 3.14159265359;
             
             // Rayleigh phase function
             float RayleighPhase(float cosTheta) {
-                return (3.0 / (16.0 * PI)) * (1.0 + cosTheta * cosTheta);
+                return (3.0 / (16.0 * PTMath::OnePi)) * (1.0 + cosTheta * cosTheta);
             }
             
             // Mie phase function (Henyey-Greenstein)
             float MiePhase(float cosTheta, float g) {
                 float g2 = g * g;
-                return (1.0 / (4.0 * PI)) * ((1.0 - g2) / pow(1.0 + g2 - 2.0 * g * cosTheta, 1.5));
+                return (1.0 / (4.0 * PTMath::OnePi)) * ((1.0 - g2) / pow(1.0 + g2 - 2.0 * g * cosTheta, 1.5));
             }
             
             void main() {
@@ -164,12 +164,12 @@ namespace PTEarth {
         const float radius = m_Params.AtmosphereRadius / 1000.0f;  // Scale down for rendering
         
         for (uint32_t stack = 0; stack <= stacks; ++stack) {
-            float phi = PI * float(stack) / float(stacks);
+            float phi = PTMath::OnePi * float(stack) / float(stacks);
             float sinPhi = sinf(phi);
             float cosPhi = cosf(phi);
             
             for (uint32_t slice = 0; slice <= slices; ++slice) {
-                float theta = 2.0f * PI * float(slice) / float(slices);
+                float theta = 2.0f * PTMath::OnePi * float(slice) / float(slices);
                 float sinTheta = sinf(theta);
                 float cosTheta = cosf(theta);
                 
@@ -249,4 +249,5 @@ namespace PTEarth {
     }
 
 }
+
 

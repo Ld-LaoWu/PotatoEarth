@@ -4,6 +4,7 @@
 #include "Tile.h"
 #include <vector>
 #include <future>
+#include <queue>
 
 namespace PTEarth {
 
@@ -117,5 +118,6 @@ namespace PTEarth {
     };
 
 }
+
 
 

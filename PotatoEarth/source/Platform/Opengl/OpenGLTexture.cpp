@@ -1,7 +1,9 @@
-#include "potatopch.h"
+﻿#include "potatopch.h"
 #include "OpenGLTexture.h"
 
 #include <glad/glad.h>
+#include <stb_image.h>
+#define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
 namespace PTEarth {
@@ -82,3 +84,4 @@ namespace PTEarth {
     }
 
 }
+

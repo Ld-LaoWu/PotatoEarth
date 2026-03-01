@@ -7,7 +7,7 @@
 namespace PTEarth {
 
     ImageryLayer::ImageryLayer(const std::string& name, ImageryProviderType type)
-        : m_Name(name), m_ProviderType(type) {
+        : m_Name(name), m_Type(type) {
     }
 
     ImageryLayer::~ImageryLayer() {
@@ -28,7 +28,8 @@ namespace PTEarth {
         return false;
     }
 
-    void ImageryLayer::ProcessLoadingQueue() {
+    void ImageryLayer::Update() {
+        // Process loading queue
     }
 
 }

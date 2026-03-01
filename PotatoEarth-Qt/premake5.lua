@@ -78,3 +78,4 @@ project "PotatoEarth-Qt"
 		runtime "Release"
 		optimize "On"
 
+

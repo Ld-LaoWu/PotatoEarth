@@ -42,6 +42,11 @@ project "PotatoEarth"
 		"ImGui"
 	}
 
+	links
+	{
+		"opengl32.lib"
+	}
+
 	filter "configurations:Debug"
 		defines "PT_DEBUG"
 		symbols "On"
@@ -55,4 +60,5 @@ project "PotatoEarth"
 		optimize "On"
 
 	filter {}
+
 
